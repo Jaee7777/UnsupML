@@ -119,7 +119,7 @@ if __name__ == "__main__":
     # df["target"] = iris.target
 
     # Fix the seed for the random number generator for reproducibility.
-    #np.random.seed(42)
+    np.random.seed(42)
 
     # Lloyd Algorithm
     centroid, df, iter = lloyd(df, k)
