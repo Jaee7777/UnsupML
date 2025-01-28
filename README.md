@@ -8,3 +8,5 @@
 ```
 make kmean
 ```
+
+* Colab version with the plots are [here](src/K_mean_cluster.ipynb)
