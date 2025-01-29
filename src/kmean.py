@@ -25,6 +25,13 @@ def assign_cluster(df, k, d, centroid):
         df.iloc[x, -1] = np.argmin(temp)
     return
 
+def find_wcss(df, d, centroid):
+    result = 0
+    df_numpy = df.to_numpy()
+    for x in df_numpy:
+        vec_dif = x[:d] - centroid[int(x[-1])]
+        result += np.dot(vec_dif.T, vec_dif)
+    return result
 
 def lloyd(df, k, max_iter=100):
     # Find the dimension of the datapoints.
@@ -46,7 +53,8 @@ def lloyd(df, k, max_iter=100):
         centroid = find_centroid(df, k, d)
         # check if the centroid has moved.
         dif_centroid = np.abs(centroid_before-centroid)
-    return centroid, df, iter
+    wcss = find_wcss(df, d, centroid)
+    return centroid, df, iter, wcss
 
 def macqueen(df, k, max_iter=100):
     # Find the dimension of the datapoints.
@@ -75,7 +83,8 @@ def macqueen(df, k, max_iter=100):
         centroid = find_centroid(df, k, d)
         # check if the centroid has moved.
         dif_centroid = np.abs(centroid_before-centroid)
-    return centroid, df, iter
+    wcss = find_wcss(df, d, centroid)
+    return centroid, df, iter, wcss
 
 def hartigan(df, k, max_iter=100):
     # Find the dimension of the datapoints.
@@ -104,7 +113,8 @@ def hartigan(df, k, max_iter=100):
         centroid = find_centroid(df, k, d)
         # check if the centroid has moved.
         dif_centroid = np.abs(centroid_before-centroid)
-    return centroid, df, iter
+    wcss = find_wcss(df, d, centroid)
+    return centroid, df, iter, wcss
 
 
 if __name__ == "__main__":
@@ -116,42 +126,49 @@ if __name__ == "__main__":
 
     # Create a dataframe.
     df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
-    # df["target"] = iris.target
 
     # Fix the seed for the random number generator for reproducibility.
     np.random.seed(42)
 
     # Lloyd Algorithm
-    centroid, df, iter = lloyd(df, k)
+    centroid, df, iter, wcss = lloyd(df, k)
     print("Lloyd Algorithm: ")
     #print(df)
     print(f"centroiods are: \n{centroid}")
 
     for x in range(k):
         print(f"{x}-cluster has {df[df["k"] == x].shape[0]} points.")
-    print(f"Lloyd Algorithm took {iter} iterations.")
+    print(f"Lloyd Algorithm took {iter} iterations, with wcss = {wcss}.")
 
     # Create a dataframe.
     df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
     # Mac Queen Algorithm.
-    centroid, df, iter = macqueen(df, k)
+    centroid, df, iter, wcss = macqueen(df, k)
     print("Mac Queen Algorithm: ")
     #print(df)
     print(f"centroiods are: \n{centroid}")
 
     for x in range(k):
         print(f"{x}-cluster has {df[df["k"] == x].shape[0]} points.")
-    print(f"Mac Queen Algorithm took {iter} iterations.")
+    print(f"Mac Queen Algorithm took {iter} iterations, with wcss = {wcss}.")
 
     # Create a dataframe.
     df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
     # Hartigan-Wong Algorithm.
-    centroid, df, iter = hartigan(df, k)
+    centroid, df, iter, wcss = hartigan(df, k)
     print("Hartigan-Wong Algorithm: ")
     #print(df)
     print(f"centroiods are: \n{centroid}")
 
     for x in range(k):
         print(f"{x}-cluster has {df[df["k"] == x].shape[0]} points.")
-    print(f"Hartigan-Wong Algorithm took {iter} iterations.")
+    print(f"Hartigan-Wong Algorithm took {iter} iterations, with wcss = {wcss}.")
 
+    # Elbow method
+    for k in range(2,7):
+        df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+        # centroid, df, iter, wcss = lloyd(df, k)
+        # centroid, df, iter, wcss = macqueen(df, k)
+        centroid, df, iter, wcss = hartigan(df, k)
+        print(f"{k} cluster has wcss = {wcss}")
+        # print(centroid)
