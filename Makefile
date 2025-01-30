@@ -1,2 +1,2 @@
 kmean:
-	python -B src/kmean.py
+	python -B src/hw01.py
