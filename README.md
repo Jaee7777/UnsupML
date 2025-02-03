@@ -9,7 +9,7 @@
 make kmean
 ```
 
-* Colab version with the plots are [here](src/K_mean_cluster.ipynb)
+* Colab version with the plots are [here](src/K_mean_cluster.ipynb) or [here](https://colab.research.google.com/drive/1IqTUJfrh7rDw8AOPhbA2V1e5G6YI0kym)
 
 
 ## hw 02
@@ -18,3 +18,5 @@ make kmean
 ```
 make hw02
 ```
+
+* Colab version with the plots are [here](src/hw2_Clustering.ipynb) or [here](https://colab.research.google.com/drive/10RqQOOFVNMIAN5hCuXpT1HW81cBiERbf#scrollTo=GAj-x2hB5DV3)
