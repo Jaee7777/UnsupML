@@ -4,3 +4,4 @@ kmean:
 hw02:
 	python -B src/hw02_1.py
 	python -B src/hw02_2.py
+	python -B src/hw02_2_complex.py
