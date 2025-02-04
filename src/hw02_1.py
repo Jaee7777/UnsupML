@@ -185,7 +185,7 @@ if __name__ == "__main__":
     plt.ylabel("WCSS")
     plt.title("Lloyd")
     plt.grid(True)
-    plt.ylim(0, 750)
+    plt.ylim(0, 800)
 
     plt.subplot(2, 2, 2)
     plt.plot(k_values, wcss_elkan_avg, "bs-")
@@ -193,7 +193,7 @@ if __name__ == "__main__":
     plt.ylabel("WCSS")
     plt.title("Elkan")
     plt.grid(True)
-    plt.ylim(0, 750)
+    plt.ylim(0, 800)
 
     plt.subplot(2, 2, 3)
     plt.plot(k_values, time_lloyd_avg, "gs-")
