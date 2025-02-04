@@ -32,6 +32,7 @@ if __name__ == "__main__":
     sns.scatterplot(x="PCA1", y="PCA2", data=pca_df)
     plt.title("Wine dataset after PCA")
     plt.tight_layout
+    plt.savefig("fig/kmean_data.png")
     plt.show()
 
     # Part 2 ===========================================================
@@ -128,7 +129,9 @@ if __name__ == "__main__":
     plt.title("Random")
     plt.grid(True)
     plt.ylim(0, 0.01)
+    plt.gcf().set_size_inches(10, 9)
     plt.tight_layout
+    plt.savefig("fig/kmean_init.png")
     plt.show()
 
     # Part 3 ===========================================================
@@ -207,5 +210,7 @@ if __name__ == "__main__":
     plt.title("Elkan")
     plt.grid(True)
     plt.ylim(0, 0.006)
+    plt.gcf().set_size_inches(10, 6)
     plt.tight_layout
+    plt.savefig("fig/kmean_opt.png")
     plt.show()

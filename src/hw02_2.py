@@ -22,6 +22,7 @@ def plot_agglo(X_scaled, link_choice=str):
         plt.subplot(5, 2, i - 1)
         plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=y_pred)
         plt.title(f"Linkage = {link_choice} & Cluster = {i}")
+    plt.gcf().set_size_inches(10, 15)
     plt.tight_layout
     return score_s, score_chs
 
@@ -31,6 +32,7 @@ def plot_score(k, score, color):
     plt.xlabel("k")
     plt.ylabel("score")
     plt.grid(True)
+    plt.tight_layout
 
 
 if __name__ == "__main__":
@@ -45,6 +47,8 @@ if __name__ == "__main__":
     # plot scaled data.
     plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=y)
     plt.title("Scaled blobs data with 4 centers")
+    plt.tight_layout
+    plt.savefig("fig/agglo_data.png")
     plt.show()
 
     # Part 2 ==================================================================
@@ -54,6 +58,7 @@ if __name__ == "__main__":
     list_chs = []
     for link in link_type:
         score_s, score_chs = plot_agglo(X_scaled, link_choice=link)
+        plt.savefig(f"fig/agglo_{link}.png")
         plt.show()
         list_s.append(score_s)
         list_chs.append(score_chs)
@@ -70,6 +75,8 @@ if __name__ == "__main__":
         plot_score(k_values, list_chs[i - 1], "bs-")
         plt.title(f"CHI score for {link} linkage")
         plt.ylim(0, 5000)
+    plt.gcf().set_size_inches(10, 12)
+    plt.savefig("fig/agglo_score.png")
     plt.show()
 
     # Part 4 ==================================================================
@@ -77,4 +84,5 @@ if __name__ == "__main__":
         Z = linkage(X_scaled, link)
         dendrogram(Z)
         plt.title(f"{link} linkage")
+        plt.savefig(f"fig/dendogram_{link}.png")
         plt.show()
