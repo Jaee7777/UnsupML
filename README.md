@@ -13,7 +13,7 @@
 make hw01
 ```
 
-* Colab version with the plots are [here](src/K_mean_cluster.ipynb) or [here](https://colab.research.google.com/drive/1IqTUJfrh7rDw8AOPhbA2V1e5G6YI0kym)
+* Source code in Colab version with the plots can be found in the [repo](src/K_mean_cluster.ipynb) or [colab link](https://colab.research.google.com/drive/1IqTUJfrh7rDw8AOPhbA2V1e5G6YI0kym)
 
 
 ## hw 02
@@ -23,4 +23,4 @@ make hw01
 make hw02
 ```
 
-* Colab version with the plots are [here](src/hw2_Clustering.ipynb) or [here](https://colab.research.google.com/drive/10RqQOOFVNMIAN5hCuXpT1HW81cBiERbf#scrollTo=GAj-x2hB5DV3)
+* Source code in Colab version with the plots can be found in the [repo](src/hw2_Clustering.ipynb) or [colab link](https://colab.research.google.com/drive/10RqQOOFVNMIAN5hCuXpT1HW81cBiERbf#scrollTo=GAj-x2hB5DV3)
