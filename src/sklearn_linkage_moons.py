@@ -1,38 +1,8 @@
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons
-from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import silhouette_score, calinski_harabasz_score
 from scipy.cluster.hierarchy import dendrogram, linkage
-
-
-def plot_agglo(X_scaled, link_choice=str):
-    score_s = []
-    score_chs = []
-    for i in range(2, 11):
-        agglo = AgglomerativeClustering(
-            n_clusters=i,
-            linkage=link_choice,
-        )
-        y_pred = agglo.fit_predict(X_scaled)
-        agglo_model = agglo.fit(X_scaled)
-        score_s.append(silhouette_score(X_scaled, agglo_model.labels_))
-        score_chs.append(calinski_harabasz_score(X_scaled, agglo_model.labels_))
-
-        plt.subplot(5, 2, i - 1)
-        plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=y_pred)
-        plt.title(f"Linkage = {link_choice} & Cluster = {i}")
-    plt.gcf().set_size_inches(10, 15)
-    plt.tight_layout
-    return score_s, score_chs
-
-
-def plot_score(k, score, color):
-    plt.plot(k, score, color)
-    plt.xlabel("k")
-    plt.ylabel("score")
-    plt.grid(True)
-    plt.tight_layout
+from sklearn_linkage_blobs import plot_agglo, plot_score
 
 
 if __name__ == "__main__":

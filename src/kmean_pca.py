@@ -10,6 +10,14 @@ from sklearn.metrics import silhouette_score
 import time
 
 
+def plotit(y_data, line, ylabel, name):
+    plt.plot(k_values, y_data, line)
+    plt.xlabel("k")
+    plt.ylabel(ylabel)
+    plt.title(name)
+    plt.grid(True)
+
+
 if __name__ == "__main__":
     # Part 1 ===========================================================
     # select wine data from sklearn.
@@ -75,60 +83,22 @@ if __name__ == "__main__":
         time_plus_total = time_plus_total + np.array(time_plus)
         time_rnd_total = time_rnd_total + np.array(time_rnd)
 
-    wcss_plus_avg = wcss_plus_total / 9
-    wcss_rnd_avg = wcss_rnd_total / 9
-    score_plus_avg = score_plus_total / 9
-    score_rnd_avg = score_rnd_total / 9
-    time_plus_avg = time_plus_total / 9
-    time_rnd_avg = time_rnd_total / 9
+    calc_name = ["WCSS", "Silhouette score", "Runtime"]
+    calc_data = [
+        [wcss_plus_total / 9, wcss_rnd_total / 9],
+        [score_plus_total / 9, score_rnd_total / 9],
+        [time_plus_total / 9, time_rnd_total / 9],
+    ]
+    init_methods = ["k-means++", "Random"]
+    line_col = ["gs-", "bs-"]
 
-    plt.subplot(3, 2, 1)
-    plt.plot(k_values, wcss_plus_avg, "gs-")
-    plt.xlabel("k")
-    plt.ylabel("WCSS")
-    plt.title("k-means++")
-    plt.grid(True)
-    plt.ylim(0, 750)
+    index = 0
+    for x, x_name in enumerate(calc_name):
+        for y, y_name in enumerate(init_methods):
+            index += 1
+            plt.subplot(3, 2, index)
+            plotit(y_data=calc_data[x][y], line=line_col[y], ylabel=x_name, name=y_name)
 
-    plt.subplot(3, 2, 2)
-    plt.plot(k_values, wcss_rnd_avg, "bs-")
-    plt.xlabel("k")
-    plt.ylabel("WCSS")
-    plt.title("Random")
-    plt.grid(True)
-    plt.ylim(0, 750)
-
-    plt.subplot(3, 2, 3)
-    plt.plot(k_values, score_plus_avg, "gs-")
-    plt.xlabel("k")
-    plt.ylabel("Silhouette score")
-    plt.title("k-means++")
-    plt.grid(True)
-    plt.ylim(0.35, 0.65)
-
-    plt.subplot(3, 2, 4)
-    plt.plot(k_values, score_rnd_avg, "bs-")
-    plt.xlabel("k")
-    plt.ylabel("Silhouette score")
-    plt.title("Random")
-    plt.grid(True)
-    plt.ylim(0.35, 0.65)
-
-    plt.subplot(3, 2, 5)
-    plt.plot(k_values, time_plus_avg, "gs-")
-    plt.xlabel("k")
-    plt.ylabel("Runtime")
-    plt.title("k-means++")
-    plt.grid(True)
-    plt.ylim(0, 0.01)
-
-    plt.subplot(3, 2, 6)
-    plt.plot(k_values, time_rnd_avg, "bs-")
-    plt.xlabel("k")
-    plt.ylabel("Runtime")
-    plt.title("Random")
-    plt.grid(True)
-    plt.ylim(0, 0.01)
     plt.gcf().set_size_inches(10, 9)
     plt.tight_layout
     plt.savefig("fig/kmean_init.png")
@@ -179,37 +149,21 @@ if __name__ == "__main__":
     time_lloyd_avg = time_lloyd_total / 9
     time_elkan_avg = time_elkan_total / 9
 
-    plt.subplot(2, 2, 1)
-    plt.plot(k_values, wcss_lloyd_avg, "gs-")
-    plt.xlabel("k")
-    plt.ylabel("WCSS")
-    plt.title("Lloyd")
-    plt.grid(True)
-    plt.ylim(0, 800)
+    calc_name = ["WCSS", "Runtime"]
+    calc_data = [
+        [wcss_lloyd_total / 9, wcss_elkan_total / 9],
+        [time_lloyd_total / 9, time_elkan_total / 9],
+    ]
+    opt_methods = ["Lloyd", "Elkan"]
+    line_col = ["gs-", "bs-"]
 
-    plt.subplot(2, 2, 2)
-    plt.plot(k_values, wcss_elkan_avg, "bs-")
-    plt.xlabel("k")
-    plt.ylabel("WCSS")
-    plt.title("Elkan")
-    plt.grid(True)
-    plt.ylim(0, 800)
+    index = 0
+    for x, x_name in enumerate(calc_name):
+        for y, y_name in enumerate(opt_methods):
+            index += 1
+            plt.subplot(2, 2, index)
+            plotit(y_data=calc_data[x][y], line=line_col[y], ylabel=x_name, name=y_name)
 
-    plt.subplot(2, 2, 3)
-    plt.plot(k_values, time_lloyd_avg, "gs-")
-    plt.xlabel("k")
-    plt.ylabel("Runtime")
-    plt.title("Lloyd")
-    plt.grid(True)
-    plt.ylim(0, 0.006)
-
-    plt.subplot(2, 2, 4)
-    plt.plot(k_values, time_elkan_avg, "bs-")
-    plt.xlabel("k")
-    plt.ylabel("Runtime")
-    plt.title("Elkan")
-    plt.grid(True)
-    plt.ylim(0, 0.006)
     plt.gcf().set_size_inches(10, 6)
     plt.tight_layout
     plt.savefig("fig/kmean_opt.png")
