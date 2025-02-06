@@ -6,7 +6,7 @@
 
 * Type following command to the command line to see the result of 3 different algorithms of k-mean clustering:
 ```
-make kmean
+make hw01
 ```
 
 * Colab version with the plots are [here](src/K_mean_cluster.ipynb) or [here](https://colab.research.google.com/drive/1IqTUJfrh7rDw8AOPhbA2V1e5G6YI0kym)
