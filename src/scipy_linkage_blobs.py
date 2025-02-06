@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
-from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score, calinski_harabasz_score
 from scipy.cluster.hierarchy import dendrogram, linkage, fcluster

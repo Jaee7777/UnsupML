@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
 from scipy_linkage_blobs import plot_agglo, plot_score
+from scipy.cluster.hierarchy import dendrogram, linkage
 
 
 if __name__ == "__main__":
