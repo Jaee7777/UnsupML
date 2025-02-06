@@ -2,6 +2,10 @@
 * class at Roux
 * Storing codes for hw solutions.
 
+## setup
+* Use 'git' and 'make' packages in terminal to run the source codes as instructed here.
+* There is a [instruction](https://github.com/ds5110/git-intro?tab=readme-ov-file) of how to set up 'git' and 'make'
+
 ## hw 01
 
 * Type following command to the command line to see the result of 3 different algorithms of k-mean clustering:
