@@ -1,7 +1,7 @@
-kmean:
-	python -B src/hw01.py
+hw01:
+	python -B src/K_mean_cluster.py
 
 hw02:
-	python -B src/hw02_1.py
-	python -B src/hw02_2.py
-	python -B src/hw02_2_complex.py
+	python -B src/kmean_pca.py
+	python -B src/sklearn_linkage_blobs.py
+	python -B src/sklearn_linkage_moons.py
