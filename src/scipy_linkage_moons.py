@@ -29,7 +29,7 @@ if __name__ == "__main__":
     list_chs = []
     for link in link_type:
         score_s, score_chs = plot_agglo(X_scaled, link_choice=link)
-        plt.savefig(f"fig/agglo_{link}.png")
+        plt.savefig(f"fig/agglo_{link}_c.png")
         plt.show()
         list_s.append(score_s)
         list_chs.append(score_chs)
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     fig.suptitle("Evaluation of different linkages")
     plt.subplots_adjust(top=0.85)
     fig.tight_layout(h_pad=2)
-    plt.savefig("fig/agglo_score.png")
+    plt.savefig("fig/agglo_score_c.png")
     plt.show()
 
     # Part 4 ==================================================================
@@ -71,5 +71,5 @@ if __name__ == "__main__":
         Z = linkage(X_scaled, link)
         dendrogram(Z)
         plt.title(f"{link} linkage")
-        plt.savefig(f"fig/dendogram_{link}.png")
+        plt.savefig(f"fig/dendogram_{link}_c.png")
         plt.show()
