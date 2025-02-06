@@ -10,12 +10,16 @@ from sklearn.metrics import silhouette_score
 import time
 
 
-def plotit(y_data, line, ylabel, name):
-    plt.plot(k_values, y_data, line)
-    plt.xlabel("k")
-    plt.ylabel(ylabel)
-    plt.title(name)
-    plt.grid(True)
+def plotit(axs, x_data, y_data, line, ylabel, name, row, col):
+    axs[row, col].plot(
+        x_data,
+        y_data,
+        line,
+    )
+    axs[row, col].set_xlabel("k")
+    axs[row, col].set_ylabel(ylabel)
+    axs[row, col].set_title(name)
+    axs[row, col].grid(True)
 
 
 if __name__ == "__main__":
@@ -92,15 +96,24 @@ if __name__ == "__main__":
     init_methods = ["k-means++", "Random"]
     line_col = ["gs-", "bs-"]
 
-    index = 0
+    fig, axs = plt.subplots(3, 2)
     for x, x_name in enumerate(calc_name):
         for y, y_name in enumerate(init_methods):
-            index += 1
-            plt.subplot(3, 2, index)
-            plotit(y_data=calc_data[x][y], line=line_col[y], ylabel=x_name, name=y_name)
+            plotit(
+                axs=axs,
+                x_data=k_values,
+                y_data=calc_data[x][y],
+                line=line_col[y],
+                ylabel=x_name,
+                name=y_name,
+                row=x,
+                col=y,
+            )
 
-    plt.gcf().set_size_inches(10, 9)
-    plt.tight_layout
+    fig.set_size_inches(10, 9)
+    fig.suptitle("Initialization method")
+    plt.subplots_adjust(top=0.85)
+    fig.tight_layout(h_pad=2)
     plt.savefig("fig/kmean_init.png")
     plt.show()
 
@@ -157,14 +170,23 @@ if __name__ == "__main__":
     opt_methods = ["Lloyd", "Elkan"]
     line_col = ["gs-", "bs-"]
 
-    index = 0
+    fig, axs = plt.subplots(2, 2)
     for x, x_name in enumerate(calc_name):
         for y, y_name in enumerate(opt_methods):
-            index += 1
-            plt.subplot(2, 2, index)
-            plotit(y_data=calc_data[x][y], line=line_col[y], ylabel=x_name, name=y_name)
+            plotit(
+                axs=axs,
+                x_data=k_values,
+                y_data=calc_data[x][y],
+                line=line_col[y],
+                ylabel=x_name,
+                name=y_name,
+                row=x,
+                col=y,
+            )
 
-    plt.gcf().set_size_inches(10, 6)
-    plt.tight_layout
+    fig.set_size_inches(10, 6)
+    fig.suptitle("Optimization method")
+    plt.subplots_adjust(top=0.85)
+    fig.tight_layout(h_pad=2)
     plt.savefig("fig/kmean_opt.png")
     plt.show()

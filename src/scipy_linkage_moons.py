@@ -1,14 +1,15 @@
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
-from scipy_linkage_blobs import plot_agglo, plot_score
+from scipy_linkage_blobs import plot_agglo
 from scipy.cluster.hierarchy import dendrogram, linkage
+from kmean_pca import plotit
 
 
 if __name__ == "__main__":
     # Part 1 ==================================================================
     # generate sample data.
-    X, y = make_moons(n_samples=1000, random_state=0, noise=0.2)
+    X, y = make_moons(n_samples=200, random_state=0, noise=0.2)
 
     # scale the data.
     scaler = StandardScaler()
@@ -34,18 +35,34 @@ if __name__ == "__main__":
         list_chs.append(score_chs)
 
     # Part 3 ==================================================================
+    fig, axs = plt.subplots(5, 2)
     i = 0
     for link in link_type:
+        plotit(
+            axs=axs,
+            x_data=k_values,
+            y_data=list_s[i],
+            line="gs-",
+            ylabel="score",
+            name=f"Silhouette score for {link} linkage",
+            row=i,
+            col=0,
+        )
+        plotit(
+            axs=axs,
+            x_data=k_values,
+            y_data=list_chs[i],
+            line="bs-",
+            ylabel="score",
+            name=f"CHI score for {link} linkage",
+            row=i,
+            col=1,
+        )
         i += 1
-        plt.subplot(5, 2, 2 * i - 1)
-        plot_score(k_values, list_s[i - 1], "gs-")
-        plt.title(f"Silhouette score for {link} linkage")
-        # plt.ylim(0, 0.8)
-        plt.subplot(5, 2, 2 * i)
-        plot_score(k_values, list_chs[i - 1], "bs-")
-        plt.title(f"CHI score for {link} linkage")
-        # plt.ylim(0, 5000)
-    plt.gcf().set_size_inches(10, 15)
+    fig.set_size_inches(10, 15)
+    fig.suptitle("Evaluation of different linkages")
+    plt.subplots_adjust(top=0.85)
+    fig.tight_layout(h_pad=2)
     plt.savefig("fig/agglo_score.png")
     plt.show()
 
