@@ -1,34 +1,7 @@
 import matplotlib.pyplot as plt
-from sklearn.datasets import make_blobs, make_moons
-from sklearn.cluster import AgglomerativeClustering
+from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import silhouette_score, calinski_harabasz_score
-from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
-
-
-def plot_agglo(X_scaled, link_choice=str):
-    score_s = []
-    score_chs = []
-    for i in range(2, 11):
-        Z = linkage(X_scaled, link_choice)
-        y_pred = fcluster(Z=Z, t=i, criterion="maxclust")
-        # score_s.append(silhouette_score(X_scaled, agglo_model.labels_))
-        # score_chs.append(calinski_harabasz_score(X_scaled, agglo_model.labels_))
-
-        plt.subplot(5, 2, i - 1)
-        plt.scatter(X_scaled[:, 0], X_scaled[:, 1], c=y_pred)
-        plt.title(f"Linkage = {link_choice} & Cluster = {i}")
-    plt.gcf().set_size_inches(10, 15)
-    plt.tight_layout
-    return score_s, score_chs
-
-
-def plot_score(k, score, color):
-    plt.plot(k, score, color)
-    plt.xlabel("k")
-    plt.ylabel("score")
-    plt.grid(True)
-    plt.tight_layout
+from scipy_linkage_blobs import plot_agglo, plot_score
 
 
 if __name__ == "__main__":
@@ -63,15 +36,15 @@ if __name__ == "__main__":
     i = 0
     for link in link_type:
         i += 1
-        plt.subplot(4, 2, 2 * i - 1)
+        plt.subplot(5, 2, 2 * i - 1)
         plot_score(k_values, list_s[i - 1], "gs-")
         plt.title(f"Silhouette score for {link} linkage")
-        plt.ylim(0, 0.8)
-        plt.subplot(4, 2, 2 * i)
+        # plt.ylim(0, 0.8)
+        plt.subplot(5, 2, 2 * i)
         plot_score(k_values, list_chs[i - 1], "bs-")
         plt.title(f"CHI score for {link} linkage")
-        plt.ylim(0, 5000)
-    plt.gcf().set_size_inches(10, 12)
+        # plt.ylim(0, 5000)
+    plt.gcf().set_size_inches(10, 15)
     plt.savefig("fig/agglo_score.png")
     plt.show()
 

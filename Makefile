@@ -3,5 +3,5 @@ hw01:
 
 hw02:
 	python -B src/kmean_pca.py
-	python -B src/sklearn_linkage_blobs.py
-	python -B src/sklearn_linkage_moons.py
+	python -B src/scipy_linkage_blobs.py
+	python -B src/scipy_linkage_moons.py
