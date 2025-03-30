@@ -24,3 +24,10 @@ make hw02
 ```
 
 * Source code in Colab version with the plots can be found in the [repo](src/hw2_Clustering.ipynb) or [colab link](https://colab.research.google.com/drive/10RqQOOFVNMIAN5hCuXpT1HW81cBiERbf#scrollTo=GAj-x2hB5DV3)
+
+## Synthesis 01
+
+* Type following command to the command line to see the plots for the synthesis 1:
+```
+make syn1
+```

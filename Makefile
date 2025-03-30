@@ -5,3 +5,6 @@ hw02:
 	python -B src/kmean_pca.py
 	python -B src/scipy_linkage_blobs.py
 	python -B src/scipy_linkage_moons.py
+
+syn1:
+	python -B src/syn1.py
